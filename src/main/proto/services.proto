@@ -1,0 +1,36 @@
+/*
+
+*/
+
+
+// 1. syntax, package, option
+syntax = "proto3";
+
+package com.example.grpc;
+
+option java_multiple_files = true;
+
+
+// 2. message request, response, types, tags
+message HelloRequest{
+    string arbVariable = 1;
+    Status status = 2;
+    repeated string anotherVar = 3;
+    map<string,string> bagOfVariables = 4;
+}
+
+// 3. enum, map, repeated
+enum Status{
+    Bad = 0;
+    Good = 1;
+}
+
+
+// 4. service, unary, request/response
+message HelloResponse{
+    string greeting = 1;
+}
+
+service GreetingService{
+    rpc greeting(HelloRequest) returns ( HelloResponse);
+}
