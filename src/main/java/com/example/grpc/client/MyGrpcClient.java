@@ -24,9 +24,5 @@ public class MyGrpcClient {
 
         System.out.println(response);
 
-        //TODO find out why MyGrpcClient has a runtime Error Exception
-
-
-
     }
 }
