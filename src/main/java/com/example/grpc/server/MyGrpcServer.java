@@ -11,7 +11,7 @@ public class MyGrpcServer {
 
         //Build the server instance
         Server server = ServerBuilder.forPort(8080)
-                //add the rpc service
+                //add the service defined in the proto file
                 .addService(new GreetingServiceImpl())
                 .build();
         server.start();

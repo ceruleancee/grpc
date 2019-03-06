@@ -2,7 +2,6 @@ package com.example.grpc.client;
 
 import com.example.grpc.GreetingServiceGrpc;
 import com.example.grpc.HelloRequest;
-import com.example.grpc.PayloadType;
 import com.google.protobuf.ByteString;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -16,19 +15,18 @@ public class MyGrpcClient {
                 .useTransportSecurity()
                 .build();
 
+        // Create Channel with stub
         GreetingServiceGrpc.GreetingServiceBlockingStub stub = GreetingServiceGrpc.newBlockingStub(channel);
 
-        String graylogMessage = "{A message from a server}";
-        byte[] messageBytes = graylogMessage.getBytes();
-
+        String arbitraryMessage = "{A message from a server}";
+        byte[] messageBytes = arbitraryMessage.getBytes();
         new String(messageBytes);
 
-        // Build the services defined in proto
+        // Build the services and set the values
         HelloRequest response =
         HelloRequest.newBuilder()
-                .setPayloadType(PayloadType.GELF)
                 .setPayload(ByteString.copyFrom("random Message".getBytes()))
-                .putMetadataFields("cluster_id", "abc123")
+                .putMetadataFields("id", "abc123")
                 .build();
 
         //Print values to server

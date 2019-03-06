@@ -15,7 +15,7 @@ public class GreetingServiceImpl extends GreetingServiceGrpc.GreetingServiceImpl
                 // Send message to client
                 .setGreeting("Payload " + request.getPayload())
                 .setGreeting("PayloadType " + request.getPayloadType())
-                .setGreeting("Metdata " + request.getMetadataFieldsMap())
+                .setGreeting("data " + request.getMetadataFieldsMap())
                 .build());
         responseObserver.onCompleted();
 
