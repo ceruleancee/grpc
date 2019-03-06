@@ -13,17 +13,13 @@ option java_multiple_files = true;
 
 // 2. message request, response, types, tags
 message HelloRequest{
-    string arbVariable = 1;
-    Status status = 2;
-    repeated string anotherVar = 3;
-    map<string,string> bagOfVariables = 4;
+    string payloadType = 1;
+    bytes payload = 2;
+    string clusterID = 3;
+
 }
 
 // 3. enum, map, repeated
-enum Status{
-    Bad = 0;
-    Good = 1;
-}
 
 
 // 4. service, unary, request/response
@@ -31,6 +27,29 @@ message HelloResponse{
     string greeting = 1;
 }
 
+//stream point for RecordRoute Service
+message Point {
+    int32 latitude = 1;
+    int32 longitude = 2;
+    }
+
+// Route Summary for Record Route Service
+    message RouteSummary {
+    int32 point_count = 1;      // The number of points received.
+    int32 feature_count = 2;    // The number of known features passed while traversing the route.
+    int32 distance = 3;         // The distance covered in metres.
+    int32 elapsed_time = 4;     // The duration of the traversal in seconds.
+    }
+
+// Unary example
 service GreetingService{
     rpc greeting(HelloRequest) returns ( HelloResponse);
+}
+
+// Client side streaming example
+// Accepts a stream of Points on a route being traversed, returning a
+// RouteSummary when traversal is completed.
+service RecordRoutesService{
+    rpc RecordRoute(stream Point) returns (RouteSummary) {
+    }
 }
