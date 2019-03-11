@@ -1,5 +1,6 @@
-package com.example.grpc.server;
+package com.example.grpc;
 
+import io.grpc.BindableService;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
@@ -12,7 +13,7 @@ public class MyGrpcServer {
         //Build the server instance
         Server server = ServerBuilder.forPort(8080)
                 //add the service defined in the proto file
-                .addService(new GreetingServiceImpl())
+                //.addService(true)
                 .build();
         server.start();
 
