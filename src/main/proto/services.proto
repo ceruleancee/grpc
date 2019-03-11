@@ -1,0 +1,33 @@
+/*
+
+*/
+
+// 1. syntax, package, option
+syntax = "proto3";
+package com.example.grpc;
+option java_multiple_files = true;
+
+// 2. message request, response, types, tags
+message MessageRequest{
+    string message = 1;
+    bytes payload = 2;
+}
+message MessageResponse{
+    string message = 1;
+    bool messageStatus = 2;
+}
+
+// 3. enum, map, repeated
+
+
+// 4. service, unary, request/response
+// Unary example
+service MessageServiceU{
+    rpc MessageServiceHandlerU(MessageRequest) returns ( MessageResponse);
+}
+
+// Bidirectional
+service MessageServiceB{
+    rpc MessageServiceHandlerB(stream MessageRequest) returns (stream MessageResponse) {
+    }
+}
