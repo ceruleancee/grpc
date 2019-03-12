@@ -4,7 +4,7 @@ import io.grpc.ServerBuilder;
 
 import java.io.IOException;
 
-public class GrpcServer {
+public class GrpcServer extends MessageServiceUGrpc.MessageServiceUImplBase{
 
     static public void main(String [] args) throws IOException, InterruptedException{
 
