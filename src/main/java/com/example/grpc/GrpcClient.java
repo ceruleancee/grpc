@@ -3,7 +3,7 @@ package com.example.grpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
-public class MyGrpcClient {
+public class GrpcClient {
 
     public static void main(String [] args) throws InterruptedException{
 
