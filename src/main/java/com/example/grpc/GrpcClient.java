@@ -9,6 +9,7 @@ public class GrpcClient {
 
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8080)
                 .useTransportSecurity()
+
                 .build();
 
         // Create Channel with stub

@@ -10,7 +10,7 @@ public class GRPCMessageServiceImplement extends MessageServiceUGrpc.MessageServ
 
         responseObserver.onNext(MessageResponse.newBuilder()
                 // Send message to client
-                .setMessage("Payload ")
+                .setMessage("Message")
                 .build());
         responseObserver.onCompleted();
 
