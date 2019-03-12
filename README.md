@@ -3,11 +3,11 @@ This is a very simple Client and Server gRPC test case in Java.
 
 
 Files include:
-* MyGrpcClient.java
+* GrpcClient.java
     * The client sending messages 
-* MyGrpcServer.java
+* GrpcServer.java
     * The server receiving the messages 
-* GreetingServiceImpl.java
+* MessageServiceImplement.java
     * The class using the message definitions 
 * services.proto
     * Definitions of the messages being sent
