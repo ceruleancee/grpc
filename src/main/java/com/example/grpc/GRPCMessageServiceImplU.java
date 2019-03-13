@@ -3,7 +3,10 @@ package com.example.grpc;
 
 import io.grpc.stub.StreamObserver;
 
-public class GRPCMessageServiceImplement extends MessageServiceUGrpc.MessageServiceUImplBase{
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+
+class GRPCMessageServiceImplU extends MessageServiceUGrpc.MessageServiceUImplBase {
 
     // Implement and build the MessageServiceU service found in .proto
     public void messageRequestHandlerU(MessageRequest messageRequest, StreamObserver<MessageResponse> responseObserver) {
@@ -18,9 +21,10 @@ public class GRPCMessageServiceImplement extends MessageServiceUGrpc.MessageServ
         System.out.println("Greeting Service Implemented " + messageRequest);
     }
 
-    //Implement and build the MessageServiceB service found in .proto
 
 }
+
+
 
 
 
