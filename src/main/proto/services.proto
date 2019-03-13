@@ -4,6 +4,7 @@
 
 // 1. syntax, package, option
 syntax = "proto3";
+import "google/protobuf/timestamp.proto";
 package com.example.grpc;
 option java_multiple_files = true;
 
@@ -13,10 +14,12 @@ message MessageRequest{
     bytes payload = 2;
     repeated string extra = 3;
     Status status = 4;
+    google.protobuf.Timestamp timestamp = 5;
 }
 message MessageResponse{
     string message = 1;
     bool messageStatus = 2;
+    google.protobuf.Timestamp timestamp = 3;
 }
 
 // 3. enum, map, repeated
