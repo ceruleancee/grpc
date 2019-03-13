@@ -7,9 +7,12 @@ public class GrpcClient {
 
     public static void main(String [] args) throws InterruptedException{
 
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8080)
-                .useTransportSecurity()
-
+        // Create a channel
+        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8443)
+                // .useTransportSecurity() // Security option
+                // .nameResolverFactory() // For service registry
+                // .loadBalancerFactory() // Client side load balancer
+                .usePlaintext(true)
                 .build();
 
         // Create Channel with stub
