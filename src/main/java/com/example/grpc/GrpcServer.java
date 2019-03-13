@@ -14,10 +14,12 @@ public class GrpcServer {
         Server server = ServerBuilder.forPort(8443)
                 //add the service defined in the proto file
                 .addService(new GRPCMessageServiceImplU())  // Add unary service
-                .addService(new GRPCMessageServiceImplB())  // Add bidirectiona service
+                .addService(new GRPCMessageServiceImplB())  // Add bidirectional service
                 .build();
         server.start();
+        System.out.println("Hello World!");
         server.awaitTermination();
+
     }
 
     // Unary Service Implemented
@@ -43,10 +45,10 @@ public class GrpcServer {
     // Bidirectional Service Implemented
     public static class GRPCMessageServiceImplB extends MessageServiceBGrpc.MessageServiceBImplBase {
 
-        // Implement and build the MessageServiceU service found in .proto
+        // Implement and build the MessageServiceB service found in .proto
          static LinkedHashSet<StreamObserver<MessageResponse>> observers = new LinkedHashSet<StreamObserver<MessageResponse>>();
 
-        public StreamObserver<MessageRequest>MessageServiceHandlerB(StreamObserver<MessageResponse> responseObserver){
+        public StreamObserver<MessageRequest>messageServiceHandlerB(StreamObserver<MessageResponse> responseObserver){
             observers.add(responseObserver);
             return  new StreamObserver<MessageRequest>() {
 
