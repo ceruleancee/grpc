@@ -11,6 +11,8 @@ option java_multiple_files = true;
 message MessageRequest{
     string message = 1;
     bytes payload = 2;
+    repeated string extra = 3;
+    Status status = 4;
 }
 message MessageResponse{
     string message = 1;
