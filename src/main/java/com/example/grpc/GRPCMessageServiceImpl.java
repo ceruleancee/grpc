@@ -11,7 +11,7 @@ public abstract class GRPCMessageServiceImpl {
     public static class MessageServiceU extends MessageServiceUGrpc.MessageServiceUImplBase {
 
         // Implement and build the MessageServiceU service found in .proto
-        public void messageRequestHandlerU(MessageRequest messageRequest, StreamObserver<MessageResponse> responseObserver) {
+        public void messageServiceHandlerU(MessageRequest messageRequest, StreamObserver<MessageResponse> responseObserver) {
             System.out.println( messageRequest.getMessage());
             String message = "This is MessageServiceU..." + messageRequest.getMessage();
 
@@ -25,7 +25,6 @@ public abstract class GRPCMessageServiceImpl {
             System.out.println("GRPCMessageServiceImplU works " + messageRequest);
         }
     }
-
 
     // Bidirectional Service Implemented
     public static class MessageServiceB extends MessageServiceBGrpc.MessageServiceBImplBase {
