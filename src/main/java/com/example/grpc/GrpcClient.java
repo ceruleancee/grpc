@@ -21,11 +21,10 @@ public class GrpcClient {
                                                             .setMessage("Cerulean")
                                                             .build());
 
-        String arbitraryMessage = "{A message from a server}";
-        byte[] messageBytes = arbitraryMessage.getBytes();
-        new String(messageBytes);
-
-        // Build the services and set the values
+//        MessageServiceBGrpc.MessageServiceBBlockingStub bBlockingStub = MessageServiceBGrpc.newBlockingStub(channel);
+//        bBlockingStub.messageServiceHandlerB(MessageRequest.newBuilder()
+//                                                            .setMessage("CeruleanCee")
+//                                                            .build());
 
     }
 }
