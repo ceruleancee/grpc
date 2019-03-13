@@ -15,7 +15,11 @@ public class GrpcClient {
                 .usePlaintext(true)
                 .build();
 
-        // Create Channel with stub
+        // Unary Synchronous Blocking Stub
+        MessageServiceUGrpc.MessageServiceUBlockingStub uBlockingStub = MessageServiceUGrpc.newBlockingStub(channel);
+        uBlockingStub.messageServiceHandlerU(MessageRequest.newBuilder()
+                                                            .setMessage("Cerulean")
+                                                            .build());
 
         String arbitraryMessage = "{A message from a server}";
         byte[] messageBytes = arbitraryMessage.getBytes();
