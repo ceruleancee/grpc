@@ -20,7 +20,10 @@ message MessageResponse{
 }
 
 // 3. enum, map, repeated
-
+enum Status{
+    GOOD = 0;
+    BAD = 2;
+}
 
 // 4. service, unary, request/response
 // Unary example
