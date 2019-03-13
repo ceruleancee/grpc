@@ -6,9 +6,7 @@ Files include:
 * GrpcClient.java
     * The client sending messages 
 * GrpcServer.java
-    * The server receiving the messages 
-* MessageServiceImplement.java
-    * The class using the message definitions 
+    * The server receiving messages 
 * services.proto
     * Definitions of the messages being sent
     * Definitions of the services utilizing the messages 
