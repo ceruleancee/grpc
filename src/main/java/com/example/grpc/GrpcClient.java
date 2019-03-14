@@ -1,7 +1,11 @@
+/*
+ * Author: CeruleanCee
+ */
 package com.example.grpc;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.StreamObserver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,17 +13,18 @@ public class GrpcClient {
 
     public static void main(String[] args) throws InterruptedException {
 
-
         // Create a channel
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8443)
+
                 // .useTransportSecurity() // Security option
                 // .nameResolverFactory() // For service registry
                 // .loadBalancerFactory() // Client side load balancer
                 .usePlaintext(true)
                 .build();
 
+
         MessageRequest messageRequest = MessageRequest.newBuilder()
-                .setMessage("This is an arbitrary message! :P ")
+                .setMessage("This is an arbitrary message!")
                 .build();
 
         // Create Unary Synchronous Blocking Stub
@@ -33,5 +38,13 @@ public class GrpcClient {
 //                                                            .setMessage("CeruleanCee")
 //                                                            .build());
 
+            @Override
+            public void onError(Throwable t) {
+            }
+
+            @Override
+            public void onCompleted() {
+            }
+        };
     }
 }
