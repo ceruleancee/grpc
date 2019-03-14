@@ -33,10 +33,23 @@ public class GrpcClient {
 
 
         // Bidirectional Synchronous Blocking Stub
-//        MessageServiceBGrpc.MessageServiceBBlockingStub bBlockingStub = MessageServiceBGrpc.newBlockingStub(channel);
-//        bBlockingStub.messageServiceHandlerB(MessageRequest.newBuilder()
-//                                                            .setMessage("CeruleanCee")
-//                                                            .build());
+        MessageServiceBGrpc.MessageServiceBStub bStub = MessageServiceBGrpc.newStub(channel);
+        StreamObserver<MessageRequest> clientSideRequestStream = bStub.messageServiceHandlerB(buildResponseHandler());
+        for (int i = 0; i < 10000; i++) {
+            System.out.println(i + " : " + messageRequest);
+            clientSideRequestStream.onNext(messageRequest);
+
+        }
+        channel.awaitTermination(10000, TimeUnit.DAYS);
+
+    }
+
+    private static StreamObserver<MessageResponse> buildResponseHandler() {
+        return new StreamObserver<MessageResponse>() {
+            @Override
+            public void onNext(MessageResponse messageResponse) {
+                System.out.println("Response received: " + messageResponse);
+            }
 
             @Override
             public void onError(Throwable t) {
