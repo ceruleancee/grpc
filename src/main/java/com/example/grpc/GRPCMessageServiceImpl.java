@@ -1,8 +1,9 @@
+/*
+ * Author: CeruleanCee
+ */
 package com.example.grpc;
 
 import io.grpc.stub.StreamObserver;
-
-import java.util.LinkedHashSet;
 
 public abstract class GRPCMessageServiceImpl {
 
@@ -12,8 +13,6 @@ public abstract class GRPCMessageServiceImpl {
 
         // Implement and build the MessageServiceU service found in .proto
         public void messageServiceHandlerU(MessageRequest messageRequest, StreamObserver<MessageResponse> responseObserver) {
-            System.out.println( messageRequest.getMessage());
-            String message = "This is MessageServiceU..." + messageRequest.getMessage();
 
             responseObserver.onNext(MessageResponse.newBuilder()
                     // Send message to client
@@ -22,7 +21,7 @@ public abstract class GRPCMessageServiceImpl {
             responseObserver.onCompleted();
 
             //Print request to client
-            System.out.println("GRPCMessageServiceImplU works " + messageRequest);
+            System.out.println("Unary Message sent -> " + messageRequest);
         }
     }
 
@@ -30,25 +29,30 @@ public abstract class GRPCMessageServiceImpl {
     public static class MessageServiceB extends MessageServiceBGrpc.MessageServiceBImplBase {
 
         // Implement and build the MessageServiceB service found in .proto
-        static LinkedHashSet<StreamObserver<MessageResponse>> observers = new LinkedHashSet<>();
+
 
         public StreamObserver<MessageRequest> messageServiceHandlerB(StreamObserver<MessageResponse> responseObserver) {
-            observers.add(responseObserver);
+
             return new StreamObserver<MessageRequest>() {
 
                 public void onNext(MessageRequest messageRequest) {
+
+                    System.out.println(messageRequest.toString());
+                    // Pass the messageRequest off to be processed by Graylog input system
                     MessageResponse messageResponse = MessageResponse.newBuilder()
                             .setMessage(messageRequest.toString())
                             .build();
-                    observers.forEach(o -> o.onNext(messageResponse));
+
+                    // Will send response to the only connected client.
+                    responseObserver.onNext(messageResponse);
                 }
 
                 public void onError(Throwable t) {
-                    observers.remove(responseObserver);
+
                 }
 
                 public void onCompleted() {
-                    observers.remove(responseObserver);
+
                 }
             };
         }
